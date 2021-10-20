@@ -6,50 +6,16 @@
 <meta name="generator">
 <link href="css/dostoevskiy.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script> document.oncontextmenu = cmenu; function cmenu() { return false; } </script>
-  <style>
-    body {
-      margin: 0;
-    }
-
-    .preloader {
-      position: fixed;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-      background: #fff;
-      z-index: 1001;
-    }
-
-    .preloader__image {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      width: 64px;
-      height: 64px;
-      margin-top: -32px;
-      margin-left: -32px;
-      background: url('https://fedor-dostoevskiy.github.io/preloader.gif') no-repeat 50% 50%;
-      /*расположение (url) изображения gif и др. параметры*/
-    }
-
-    .loaded_hiding .preloader {
-      transition: 0.3s opacity;
-      opacity: 0;
-    }
-
-    .loaded .preloader {
-      display: none;
-    }
-  </style>
 </head>
 <body>
   <!-- Прелоадер -->
-  <div class="preloader">
-    <div class="preloader__image"></div>
-  </div>
+  
+<div id="preloaders">
+<img src="preloader.gif">
+</div>
 
   <!-- Основной контент страницы -->
 <div id="container">
@@ -682,14 +648,10 @@
 </table>
 </div>
 </div>
-  <script>
-    window.onload = function () {
-      document.body.classList.add('loaded_hiding');
-      window.setTimeout(function () {
-        document.body.classList.add('loaded');
-        document.body.classList.remove('loaded_hiding');
-      }, 500);
-    }
-  </script>
+<script>
+$(window).load(function() {
+$('#preloaders').find('img').fadeOut().end().delay(400).fadeOut('slow');
+});
+</script>
 </body>
 </html>
