@@ -4,33 +4,54 @@
 <meta charset="utf-8">
 <title>Безымянная страница</title>
 <meta name="generator">
-<style>
-   .preloader{
-          position: fixed;
-		  background-color: #ffffff;
-		  top: 0;
-		  left: 0;
-		  right: 0;
-		  bottom: 0;
-		  z-index: 99999;
-   }
-   .preloader > div{
-          position: absolute;
-		  left: 50%;
-		  top: 50vh;
-          margin: -120px 0 0 -90px;		  
-	}
-</style>
 <link href="css/dostoevskiy.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
 <script> document.oncontextmenu = cmenu; function cmenu() { return false; } </script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      background: #fff;
+      z-index: 1001;
+    }
+
+    .preloader__image {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      width: 64px;
+      height: 64px;
+      margin-top: -32px;
+      margin-left: -32px;
+      background: url('/preloader.gif') no-repeat 50% 50%;
+      /*расположение (url) изображения gif и др. параметры*/
+    }
+
+    .loaded_hiding .preloader {
+      transition: 0.3s opacity;
+      opacity: 0;
+    }
+
+    .loaded .preloader {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<div class="preloader">
-<div>
-<img src="preloader.gif" width="200" height="200" alt="">
-</div>
-</div>
+  <!-- Прелоадер -->
+  <div class="preloader">
+    <div class="preloader__image"></div>
+  </div>
+
+  <!-- Основной контент страницы -->
 <div id="container">
 <div id="wb_Image1" style="position:absolute;left:0px;top:130px;width:970px;height:584px;z-index:0;">
 <table cellpadding="0" cellspacing="0" id="Image1" style="line-height:0">
@@ -661,10 +682,14 @@
 </table>
 </div>
 </div>
-<script>
-    $(window).on('load', function(){
-	$('.preloader').delay(700).fadeOut('slow');
-	});
-</script>
+  <script>
+    window.onload = function () {
+      document.body.classList.add('loaded_hiding');
+      window.setTimeout(function () {
+        document.body.classList.add('loaded');
+        document.body.classList.remove('loaded_hiding');
+      }, 500);
+    }
+  </script>
 </body>
 </html>
